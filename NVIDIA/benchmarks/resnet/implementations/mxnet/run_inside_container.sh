@@ -18,7 +18,6 @@ set -euxo pipefail
 
 # Vars without defaults
 : "${DGXSYSTEM:?DGXSYSTEM not set}"
-: "${CONT:?CONT not set}"
 : "${DATADIR:?DATADIR not set}"
 
 # Vars with defaults
@@ -59,7 +58,7 @@ source "${_config_file}"
 export SEED="${SEED:-}"
 
 ulimit -s 67108864
-ulimit -l -1   
+ulimit -l unlimited 
 
 sleep 30
 
@@ -77,7 +76,7 @@ mlperf_log_utils.mlperf_submission_log(constants.RESNET)"
 
         # Clear caches
         if [ "${CLEAR_CACHES}" -eq 1 ]; then
-            sync && /sbin/sysctl vm.drop_caches=3
+	    (sync && /sbin/sysctl vm.drop_caches=3) || true
             python -c "
 import mlperf_log_utils
 from mlperf_logging.mllog import constants
