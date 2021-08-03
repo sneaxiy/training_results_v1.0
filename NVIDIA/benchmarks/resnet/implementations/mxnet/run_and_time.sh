@@ -69,7 +69,7 @@ if [[ ${PROFILE} == 1 ]]; then
     THR="0"
 fi
 
-DATAROOT="/data"
+DATAROOT=${DATADIR:-"/data"}
 
 echo "running benchmark"
 export NGPUS=$SLURM_NTASKS_PER_NODE

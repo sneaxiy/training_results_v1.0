@@ -35,6 +35,7 @@ if [ ! -z $COPY_DATASET ]; then
     ${CODEDIR}/copy-data.sh "${copy_datadir}" "${DATADIR}"
     ls ${DATADIR}
 fi
+export DATADIR
 
 # Other vars
 readonly _seed_override=${SEED:-}
@@ -61,7 +62,7 @@ export SEED="${SEED:-}"
 ulimit -s 67108864
 ulimit -l unlimited 
 
-sleep 30
+# sleep 30
 
 # Run experiments
 for _experiment_index in $(seq 1 "${NEXP}"); do
