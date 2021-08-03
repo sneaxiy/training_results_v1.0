@@ -54,6 +54,7 @@ export MLPERF_HOST_OS
 mkdir -p "${LOGDIR}"
 
 # Get list of envvars to pass to docker
+source "./config_${DGXSYSTEM}_common.sh"
 source "${_config_file}"
 export SEED="${SEED:-}"
 
